@@ -64,7 +64,7 @@ func New(config ...Config) fiber.Handler {
 			if doc, err = swag.ReadDoc(cfg.InstanceName); err != nil {
 				return err
 			}
-			return c.JSON(doc)
+			return c.Type("json").SendString(doc)
 		case "", "/":
 			return c.Redirect().Status(fiber.StatusMovedPermanently).To(path.Join(prefix, defaultIndex))
 		default:
